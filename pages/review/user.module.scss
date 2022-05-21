@@ -1,0 +1,184 @@
+.container {
+	margin: 0 15%;
+	padding: 6% 0;
+	min-height: calc(100vh - 100px);
+
+	position: relative;
+
+	display: flex;
+}
+
+.userBlock {
+	background: var(--gray-800);
+	border-radius: 0.5rem;
+
+	min-width: 250px;
+	max-width: 325px;
+
+	max-height: 720px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+
+	padding: 2rem 0;
+
+	box-shadow: rgba(17, 17, 26, 0.1) 0px 0px 16px;
+	img {
+		width: 150px;
+		height: 150px;
+		border-radius: 150px;
+		box-shadow: rgba(17, 17, 26, 0.1) 0px 0px 16px;
+	}
+
+	hr {
+		margin-top: 2rem;
+
+		width: 50%;
+	}
+}
+
+.userInfo {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	text-align: center;
+
+	padding: 0 5%;
+
+	h1 {
+		margin-bottom: 0;
+	}
+
+	> p {
+		margin-top: 0.2rem;
+
+		& + p {
+			margin-top: 1rem;
+		}
+	}
+
+	div {
+		display: flex;
+		align-items: center;
+
+		p {
+			& + p {
+				margin-left: 0.5rem;
+			}
+		}
+	}
+}
+
+.githubLinkWrapper {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 1rem;
+
+	transition: color 0.2s;
+
+	&:hover {
+		color: var(--yellow-500);
+	}
+
+	> svg {
+		margin-right: 0.25rem;
+	}
+}
+
+.mainInfo {
+	width: 100%;
+	border-radius: 0.5rem;
+
+	display: grid;
+	gap: 1rem;
+	grid-template-columns: repeat(3, 1fr);
+
+	div {
+		min-height: 200px;
+		padding: 0.5rem 1rem;
+		background: var(--gray-800);
+		border-radius: 0.5rem;
+		box-shadow: rgba(17, 17, 26, 0.1) 0px 0px 16px;
+	}
+}
+
+.mainInfoContainer {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	margin-left: 1rem;
+}
+
+.repositories {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+
+	margin-top: 2rem;
+
+	gap: 2rem;
+
+	> h3 {
+		margin-bottom: 0;
+	}
+
+	div {
+		width: 100%;
+		min-height: 150px;
+
+		box-shadow: rgba(0, 0, 0, 0.2) 0px 12px 28px 0px,
+			rgba(0, 0, 0, 0.1) 0px 2px 4px 0px,
+			rgba(255, 255, 255, 0.05) 0px 0px 0px 1px inset;
+
+		padding: 1rem;
+
+		background: var(--gray-800);
+		border-radius: 0.5rem;
+
+		h4 {
+			font-size: 1.5rem;
+		}
+
+		p {
+			font-size: 1rem;
+			line-height: 1.5;
+		}
+
+		a {
+			font-size: 1.25rem;
+			padding: 0.5rem 0.5rem 0.5rem 0;
+
+			transition: color 0.2s;
+
+			& + a {
+				margin-left: 0.5rem;
+				padding: 0.5rem;
+			}
+
+			&:hover {
+				color: var(--yellow-500);
+			}
+		}
+	}
+}
+
+.muted {
+	filter: brightness(0.8);
+}
+
+.blogLink {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	transition: color 0.2s;
+
+	&:hover {
+		color: var(--yellow-500);
+	}
+
+	> svg {
+		margin-right: 0.25rem;
+	}
+}

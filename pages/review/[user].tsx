@@ -141,16 +141,16 @@ export default function UserReview({ userInfo }: UserReviewProps) {
 							<span className={styles.muted}>
 								{languages.map((language, index) => {
 									if (index < languages.length - 1) {
-										return <span>{' ' + language + ','}</span>;
+										return <span key={language}>{' ' + language + ','}</span>;
 									} else {
-										return <span>{' ' + language}</span>;
+										return <span key={language}>{' ' + language}</span>;
 									}
 								})}
 							</span>
 							<p>
 								Great choice of languages 👏
 								<br />
-								Thankfully you're not programming in C 😁.
+								{"Thankfully you're not programming in C 😁."}
 							</p>
 						</div>
 						<div className={styles.analysis}>
@@ -176,7 +176,7 @@ export default function UserReview({ userInfo }: UserReviewProps) {
 						</div>
 					</div>
 					<div className={styles.contributionBoard}>
-						<h2>User's Contributions</h2>
+						<h2>{"User's Contributions"}</h2>
 						<img
 							src={`https://ghchart.rshah.org/eba417/${user.login}`}
 							alt="Name Your Github chart"

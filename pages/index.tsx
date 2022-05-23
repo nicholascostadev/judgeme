@@ -72,7 +72,7 @@ const Home: NextPage = () => {
 							placeholder="Github username"
 							spellCheck="false"
 						/>
-						<em>We're only able to access public informations</em>
+						<em>{"We're only able to access public informations"}</em>
 						<button type="submit">
 							{loading ? <ClipLoader loading={loading} /> : 'Confirm'}
 						</button>

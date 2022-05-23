@@ -7,7 +7,7 @@ export const dynamicUserRepoPhrase = (numOfRepos: number): string => {
 		userReposPhrase = "You're a normal person, congrats 👏";
 	} else if (numOfRepos < 32) {
 		userReposPhrase =
-			"You probably should focus on only one repo, don't you think so? 😐";
+			"You probably should focus on only one repo, don't you think so? ";
 	} else if (numOfRepos < 43) {
 		userReposPhrase = "Don't you think you're a bit too much of a geek? 🤔";
 	} else {

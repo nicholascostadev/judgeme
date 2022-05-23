@@ -8,7 +8,7 @@ import {
 	dynamicContributionPhrase,
 	dynamicUserRepoPhrase,
 	getUserMostUsedLanguage,
-} from '../logic/logic';
+} from '../../src/services/logic/logic';
 
 import { useRouter } from 'next/router';
 

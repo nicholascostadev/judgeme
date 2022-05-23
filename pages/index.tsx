@@ -70,6 +70,7 @@ const Home: NextPage = () => {
 							onChange={e => setInput(e.target.value)}
 							type="text"
 							placeholder="Github username"
+							spellCheck="false"
 						/>
 						<em>We're only able to access public informations</em>
 						<button type="submit">

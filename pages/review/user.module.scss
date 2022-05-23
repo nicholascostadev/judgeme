@@ -93,13 +93,17 @@
 	display: grid;
 	gap: 1rem;
 	grid-template-columns: repeat(3, 1fr);
+}
 
-	div {
-		min-height: 200px;
-		padding: 0.5rem 1rem;
-		background: var(--surface);
-		border-radius: 0.5rem;
-		box-shadow: rgba(17, 17, 26, 0.1) 0px 0px 16px;
+.analysis {
+	min-height: 200px;
+	padding: 1rem;
+	background: var(--surface);
+	border-radius: 0.5rem;
+	box-shadow: rgba(17, 17, 26, 0.1) 0px 0px 16px;
+
+	p:first-child {
+		margin-top: 0;
 	}
 }
 
@@ -125,7 +129,7 @@
 }
 
 .muted {
-	filter: brightness(0.8);
+	color: var(--gray-300);
 }
 
 .blogLink {

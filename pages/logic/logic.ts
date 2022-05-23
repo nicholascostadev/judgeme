@@ -5,18 +5,34 @@ export const dynamicUserRepoPhrase = (numOfRepos: number): string => {
 		userReposPhrase = 'No public repos 😔';
 	} else if (numOfRepos < 25) {
 		userReposPhrase = "You're a normal person, congrats 👏";
-	} else if (numOfRepos < 100) {
-		userReposPhrase = "Sorry for asking, but don't you have a life?";
-	} else if (numOfRepos < 500) {
+	} else if (numOfRepos < 32) {
 		userReposPhrase =
-			"You're so good that I would risk to say you use VIM as your editor";
-	} else if (numOfRepos < 1000) {
-		userReposPhrase = 'Are you freaking kidding me? Like, really?😶';
+			"You probably should focus on only one repo, don't you think so? 😐";
+	} else if (numOfRepos < 43) {
+		userReposPhrase = "Don't you think you're a bit too much of a geek? 🤔";
 	} else {
-		userReposPhrase = "You're a big person, congrats";
+		userReposPhrase = 'Are you freaking kidding me? Like, really?😶';
 	}
 
 	return userReposPhrase;
+};
+
+export const dynamicContributionPhrase = (numOfContribs: number): string => {
+	let userContribsPhrase = '';
+
+	if (numOfContribs === 0) {
+		userContribsPhrase = 'No contributions 😔';
+	} else if (numOfContribs < 25) {
+		userContribsPhrase = "You're a normal person, congrats 👏";
+	} else if (numOfContribs < 100) {
+		userContribsPhrase = "Sorry for asking, but don't you have a life?";
+	} else if (numOfContribs < 500) {
+		userContribsPhrase =
+			"You're so good that I would risk to say you use VIM as your editor";
+	} else {
+		userContribsPhrase = 'Are you freaking kidding me? Like, really?😶';
+	}
+	return userContribsPhrase;
 };
 
 type Repo = {
@@ -96,5 +112,5 @@ export const getUserMostUsedLanguage = (
 		(language: any) => language.language
 	);
 
-	return [topFiveLanguages, topFiveLanguagesArray];
+	return [sortedLanguagesArraySorted, topFiveLanguagesArray];
 };

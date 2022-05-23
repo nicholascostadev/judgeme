@@ -5,9 +5,13 @@ import styles from './user.module.scss';
 import { GoMarkGithub, GoGlobe } from 'react-icons/go';
 import { Repository } from '../../src/components/Repository';
 import {
+	dynamicContributionPhrase,
 	dynamicUserRepoPhrase,
 	getUserMostUsedLanguage,
 } from '../logic/logic';
+
+import { useRouter } from 'next/router';
+
 type UserInfo = {
 	login: string;
 	name: string;
@@ -48,14 +52,6 @@ interface UserReviewProps {
 }
 
 export default function UserReview({ userInfo }: UserReviewProps) {
-	if (!userInfo) {
-		return (
-			<>
-				<Header />
-				<h1>User not found</h1>
-			</>
-		);
-	}
 	const user: UserInfo = JSON.parse(String(userInfo.userMainInfo));
 	const repos: Repo[] = JSON.parse(String(userInfo.reposInfo));
 
@@ -63,9 +59,12 @@ export default function UserReview({ userInfo }: UserReviewProps) {
 		{ language: string; percentage: number }[],
 		string[]
 	] = getUserMostUsedLanguage(userInfo.userRepos);
-	let userReposPhrase = dynamicUserRepoPhrase(user.public_repos);
+	let userReposPhrase: string = dynamicUserRepoPhrase(user.public_repos);
+	let contributionPhrase: string = dynamicContributionPhrase(
+		userInfo.userTotalContributions
+	);
 
-	let userHasRepos = false;
+	let userHasRepos: boolean = false;
 
 	if (user.public_repos > 0) {
 		repos.map((repo, index) => {
@@ -135,9 +134,7 @@ export default function UserReview({ userInfo }: UserReviewProps) {
 						</div>
 						<div className={styles.analysis}>
 							<p>Total Contributions: {userInfo.userTotalContributions}</p>
-							<p>
-								Yeah, you're kind of contributing to the world, congrats 👌
-							</p>
+							<p>{contributionPhrase}</p>
 						</div>
 						<div className={styles.analysis}>
 							<p>Most used languages:</p>
@@ -159,8 +156,9 @@ export default function UserReview({ userInfo }: UserReviewProps) {
 						<div className={styles.analysis}>
 							{userHasRepos && <p>Most used languages with percentage:</p>}
 							{topFiveLanguages.map(language => (
-								<span key={language.language} className={styles.muted}>
-									{language.language} - {language.percentage}% <br />
+								<span key={language.language}>
+									{language.language} -{' '}
+									{Number(language.percentage).toFixed(2)}% <br />
 								</span>
 							))}
 						</div>
@@ -271,6 +269,9 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
 	} catch (err) {
 		return {
 			props: {},
+			redirect: {
+				destination: '/',
+			},
 		};
 	}
 };

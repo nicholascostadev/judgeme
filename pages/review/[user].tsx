@@ -168,18 +168,6 @@ export default function UserReview({ userInfo }: UserReviewProps) {
 									</span>
 								))}
 							</div>
-							<div className={styles.analysis}>
-								<p>Most used languages:</p>
-								<span className={styles.muted}>
-									JavaScript, TypeScript, HTML, CSS
-								</span>
-							</div>
-							<div className={styles.analysis}>
-								<p>Most used languages:</p>
-								<span className={styles.muted}>
-									JavaScript, TypeScript, HTML, CSS
-								</span>
-							</div>
 						</div>
 						<div className={styles.contributionBoard}>
 							<h2>{"User's Contributions"}</h2>

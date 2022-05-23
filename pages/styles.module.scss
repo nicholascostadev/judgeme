@@ -15,7 +15,7 @@
 		}
 
 		input {
-			background-color: var(--gray-300);
+			background-color: var(--white);
 			outline: none;
 			border: 0;
 			border-radius: 0.25rem;
@@ -42,8 +42,9 @@
 
 			color: var(--white);
 
+			font-size: 1.25rem;
 			padding: 1rem 1.5rem;
-      
+
 			cursor: pointer;
 		}
 	}

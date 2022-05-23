@@ -27,6 +27,8 @@ yarn-error.log*
 
 # local env files
 .env*.local
+*.env
+env
 
 # vercel
 .vercel
@@ -64,4 +66,3 @@ jspm_packages
 # Optional REPL history
 .node_repl_history
 
-.env

@@ -1,4 +1,4 @@
-import axios, { AxiosPromise, AxiosResponse } from 'axios';
+import axios from 'axios';
 import { NextApiRequest, NextApiResponse } from 'next';
 
 export default function checkuser(req: NextApiRequest, res: NextApiResponse) {

@@ -11,6 +11,8 @@ import { api } from '../src/services/api';
 import styles from './styles.module.scss';
 
 import type { NextPage } from 'next';
+import { Footer } from '../src/components/Footer';
+import { GoMarkGithub } from 'react-icons/go';
 const Home: NextPage = () => {
 	const [input, setInput] = useState<string>('');
 	const [loading, setLoading] = useState<boolean>(false);
@@ -34,7 +36,7 @@ const Home: NextPage = () => {
 			});
 
 		if (response?.data.status !== 'ok') {
-			toast.error('Enter a valid username');
+			// toast.error('Enter a valid username');
 			setLoading(false);
 			console.log(response?.data);
 			return;
@@ -66,22 +68,29 @@ const Home: NextPage = () => {
 				<div className={styles.formContainer}>
 					<form onSubmit={handleSubmit}>
 						<label>Tell me you Github username</label>
-						<input
-							value={input}
-							onChange={e => setInput(e.target.value)}
-							type="text"
-							placeholder="Github username"
-							spellCheck="false"
-						/>
+						<div>
+							<input
+								value={input}
+								onChange={e => setInput(e.target.value)}
+								type="text"
+								placeholder="Github username"
+								spellCheck="false"
+							/>
+							<GoMarkGithub className={styles.githubIcon} fontSize={20} />
+						</div>
 						<em>{"We're only able to access public informations"}</em>
 						<button type="submit">
-							{loading ? <ClipLoader loading={loading} /> : 'Confirm'}
+							{loading ? (
+								<ClipLoader loading={loading} color="#eba417" />
+							) : (
+								'Confirm'
+							)}
 						</button>
 					</form>
 				</div>
 			</main>
 
-			<footer></footer>
+			<Footer />
 		</>
 	);
 };

@@ -2,6 +2,7 @@ import axios from 'axios';
 import { GetServerSideProps } from 'next';
 import Head from 'next/head';
 import { GoGlobe, GoMarkGithub } from 'react-icons/go';
+import { Footer } from '../../src/components/Footer';
 
 import Header from '../../src/components/Header';
 import { Repository } from '../../src/components/Repository';
@@ -177,7 +178,7 @@ export default function UserReview({ userInfo }: UserReviewProps) {
 							/>
 						</div>
 						<div className={styles.repositories}>
-							{userHasRepos && <h3>Public Starred Repositories</h3>}
+							{userHasRepos && <h2>Public Starred Repositories</h2>}
 							{userHasRepos &&
 								repos.map((repo, index) => {
 									if (repo.owner.login === user.login && index < 8) {
@@ -188,6 +189,7 @@ export default function UserReview({ userInfo }: UserReviewProps) {
 					</div>
 				</div>
 			</main>
+			<Footer />
 		</>
 	);
 }

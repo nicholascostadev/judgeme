@@ -12,10 +12,21 @@
 		height: 100%;
 
 		color: var(--yellow-500);
+		@media (max-width: 768px) {
+			margin: 0 1rem;
+
+			h2 {
+				font-size: 1rem;
+			}
+		}
 	}
 }
 
 .brand {
 	font-size: 2.5rem;
 	cursor: pointer;
+
+	@media (max-width: 768px) {
+		font-size: 1.5rem;
+	}
 }

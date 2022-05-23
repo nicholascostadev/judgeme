@@ -1,4 +1,5 @@
 import { GoLinkExternal, GoMarkGithub } from 'react-icons/go';
+
 import styles from './repository.module.scss';
 
 type RepoType = {

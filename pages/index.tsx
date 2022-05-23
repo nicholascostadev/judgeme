@@ -1,15 +1,16 @@
-import type { NextPage } from 'next';
+import 'react-toastify/dist/ReactToastify.css';
+
 import Head from 'next/head';
-import { FormEvent, useContext, useState } from 'react';
-import Header from '../src/components/Header';
-import styles from './styles.module.scss';
 import Router from 'next/router';
-import { UserContext } from './_app';
+import { FormEvent, useState } from 'react';
 import { ClipLoader } from 'react-spinners';
 import { toast, ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import { api } from '../src/services/api';
 
+import Header from '../src/components/Header';
+import { api } from '../src/services/api';
+import styles from './styles.module.scss';
+
+import type { NextPage } from 'next';
 const Home: NextPage = () => {
 	const [input, setInput] = useState<string>('');
 	const [loading, setLoading] = useState<boolean>(false);

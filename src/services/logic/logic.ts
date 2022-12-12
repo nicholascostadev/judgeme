@@ -52,14 +52,7 @@ type Repo = {
 
 type RepositoryProps = Repo[] | undefined
 
-type getUserMostUsedLanguagesReturn = [
-  { language: string; percentage: number }[],
-  string[],
-]
-
-export const getUserMostUsedLanguage = (
-  repos: RepositoryProps,
-): getUserMostUsedLanguagesReturn => {
+export const getUserMostUsedLanguage = (repos: RepositoryProps) => {
   const parsedArray = JSON.parse(String(repos))
   const languages = parsedArray?.map((repo: Repo) => repo.language)
   const filteredLanguages = languages?.filter(
@@ -103,14 +96,20 @@ export const getUserMostUsedLanguage = (
 
   const sortedLanguagesArraySorted = sortedLanguagesArray.sort(
     (a: any, b: any) => b.percentage - a.percentage,
-  )
+  ) as {
+    language: string
+    percentage: string
+  }[]
 
   const topFiveLanguages = sortedLanguagesArraySorted.slice(0, 5)
 
   // get top 5 languages as array of strings
   const topFiveLanguagesArray = topFiveLanguages.map(
     (language: any) => language.language,
-  )
+  ) as string[]
 
-  return [sortedLanguagesArraySorted, topFiveLanguagesArray]
+  return {
+    topFiveLanguages: sortedLanguagesArraySorted,
+    languages: topFiveLanguagesArray,
+  }
 }

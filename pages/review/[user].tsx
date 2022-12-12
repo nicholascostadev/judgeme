@@ -42,10 +42,10 @@ export default function UserReview({ userInfo }: UserReviewProps) {
     (repo, i) => repo.owner.login === user.login && i < 8,
   )
 
-  const [topFiveLanguages, languages]: [
-    { language: string; percentage: number }[],
-    string[],
-  ] = getUserMostUsedLanguage(userInfo.userRepos)
+  const { topFiveLanguages, languages } = getUserMostUsedLanguage(
+    userInfo.userRepos,
+  )
+
   const userReposPhrase: string = dynamicUserRepoPhrase(user.public_repos)
   const contributionPhrase: string = dynamicContributionPhrase(
     userInfo.userTotalContributions,

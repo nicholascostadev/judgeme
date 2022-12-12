@@ -159,7 +159,7 @@ export default function UserReview({ userInfo }: UserReviewProps) {
                 </p>
               </Analysis>
               <Analysis>
-                {userHasRepos && <p>Most used languages with percentage:</p>}
+                {userRepos && <p>Most used languages: </p>}
                 {topFiveLanguages.map((language) => (
                   <span key={language.language}>
                     {language.language} -{' '}
@@ -172,7 +172,7 @@ export default function UserReview({ userInfo }: UserReviewProps) {
               <h2>{"User's Contributions"}</h2>
               <img
                 src={`https://ghchart.rshah.org/eba417/${user.login}`}
-                alt="Name Your Github chart"
+                alt={`${user.login}'s Github chart`}
               />
             </ContributionBoard>
             <Repositories>

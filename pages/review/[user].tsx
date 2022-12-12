@@ -151,15 +151,7 @@ export default function UserReview({ userInfo }: UserReviewProps) {
               </Analysis>
               <Analysis>
                 <p>Most used languages:</p>
-                <Muted>
-                  {languages.map((language, index) => {
-                    if (index < languages.length - 1) {
-                      return <span key={language}>{' ' + language + ','}</span>
-                    } else {
-                      return <span key={language}>{' ' + language}</span>
-                    }
-                  })}
-                </Muted>
+                <Muted>{languages.join(', ')}</Muted>
                 <p>
                   Great choice of languages 👏
                   <br />

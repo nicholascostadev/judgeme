@@ -1,7 +1,8 @@
-import styles from './footer.module.scss'
+import { FooterContainer } from './styles'
+
 export function Footer() {
   return (
-    <footer className={styles.footer}>
+    <FooterContainer>
       <a
         href="https://github.com/nicholascostadev/judgeme"
         target="_blank"
@@ -9,6 +10,6 @@ export function Footer() {
       >
         Source Code
       </a>
-    </footer>
+    </FooterContainer>
   )
 }

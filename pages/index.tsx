@@ -3,17 +3,16 @@ import 'react-toastify/dist/ReactToastify.css'
 import Head from 'next/head'
 import Router from 'next/router'
 import { FormEvent, useState } from 'react'
+import { GoMarkGithub } from 'react-icons/go'
 import { ClipLoader } from 'react-spinners'
 import { toast, ToastContainer } from 'react-toastify'
 
+import { Footer } from '../src/components/Footer'
 import Header from '../src/components/Header'
+import { FormContainer, GithubIcon } from '../src/components/pages/styles'
 import { api } from '../src/services/api'
-import styles from './styles.module.scss'
 
 import type { NextPage } from 'next'
-import { Footer } from '../src/components/Footer'
-import { GoMarkGithub } from 'react-icons/go'
-
 const Home: NextPage = () => {
   const [input, setInput] = useState<string>('')
   const [loading, setLoading] = useState<boolean>(false)
@@ -64,7 +63,7 @@ const Home: NextPage = () => {
 
       <main>
         <Header />
-        <div className={styles.formContainer}>
+        <FormContainer>
           <form onSubmit={handleSubmit}>
             <label>Tell me you Github username</label>
             <div>
@@ -75,7 +74,7 @@ const Home: NextPage = () => {
                 placeholder="Github username"
                 spellCheck="false"
               />
-              <GoMarkGithub className={styles.githubIcon} fontSize={20} />
+              <GithubIcon as={GoMarkGithub} />
             </div>
             <em>{"We're only able to access public information"}</em>
             <button type="submit">
@@ -86,7 +85,7 @@ const Home: NextPage = () => {
               )}
             </button>
           </form>
-        </div>
+        </FormContainer>
       </main>
 
       <Footer />

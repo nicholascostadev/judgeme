@@ -2,6 +2,7 @@ import axios from 'axios'
 import { GetServerSideProps } from 'next'
 import Head from 'next/head'
 import { GoGlobe, GoMarkGithub } from 'react-icons/go'
+import { Repo, TUserInfo } from '../../@types/user'
 import { Footer } from '../../src/components/Footer'
 
 import Header from '../../src/components/Header'
@@ -24,37 +25,6 @@ import {
   dynamicUserRepoPhrase,
   getUserMostUsedLanguage,
 } from '../../src/services/logic/logic'
-
-type TUserInfo = {
-  login: string
-  name: string
-  avatar_url: string
-  company?: string
-  location?: string
-  blog?: string
-  email?: string
-  bio?: string
-  html_url: string
-  public_repos: number
-  followers: number
-  following: number
-}
-
-type Repo = {
-  id: number
-  name: string
-  owner: {
-    login: string
-  }
-  html_url: string
-  description?: string
-  created_at: string
-  updated_at: string
-  stargazers_count: number
-  homepage?: string
-  language: string
-}
-
 interface UserReviewProps {
   userInfo: {
     userMainInfo: TUserInfo | undefined

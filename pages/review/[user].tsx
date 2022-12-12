@@ -5,15 +5,27 @@ import { GoGlobe, GoMarkGithub } from 'react-icons/go'
 import { Footer } from '../../src/components/Footer'
 
 import Header from '../../src/components/Header'
+import {
+  Container,
+  UserBlock,
+  UserInfo,
+  GithubLinkWrapper,
+  Muted,
+  BlogLink,
+  MainInfoContainer,
+  MainInfo,
+  Analysis,
+  ContributionBoard,
+  Repositories,
+} from '../../src/components/pages/review/styles'
 import { Repository } from '../../src/components/Repository'
 import {
   dynamicContributionPhrase,
   dynamicUserRepoPhrase,
   getUserMostUsedLanguage,
 } from '../../src/services/logic/logic'
-import styles from './user.module.scss'
 
-type UserInfo = {
+type TUserInfo = {
   login: string
   name: string
   avatar_url: string
@@ -45,7 +57,7 @@ type Repo = {
 
 interface UserReviewProps {
   userInfo: {
-    userMainInfo: UserInfo | undefined
+    userMainInfo: TUserInfo | undefined
     reposInfo: Repo[] | undefined
     userRepos: Repo[] | undefined
     userTotalContributions: number
@@ -53,7 +65,7 @@ interface UserReviewProps {
 }
 
 export default function UserReview({ userInfo }: UserReviewProps) {
-  const user: UserInfo = JSON.parse(String(userInfo.userMainInfo))
+  const user: TUserInfo = JSON.parse(String(userInfo.userMainInfo))
   const repos: Repo[] = JSON.parse(String(userInfo.reposInfo))
 
   const [topFiveLanguages, languages]: [
@@ -82,52 +94,48 @@ export default function UserReview({ userInfo }: UserReviewProps) {
       </Head>
       <main>
         <Header />
-        <div className={styles.container}>
-          <div className={styles.userBlock}>
+        <Container>
+          <UserBlock>
             <img alt="user image" src={user.avatar_url} />
             <hr />
-            <div className={styles.userInfo}>
+            <UserInfo>
               <h1>{user.name}</h1>
-              <a
-                className={styles.githubLinkWrapper}
+              <GithubLinkWrapper
                 href={user.html_url}
                 target="_blank"
                 rel="noreferrer"
               >
                 <GoMarkGithub />
                 {user.login}
-              </a>
+              </GithubLinkWrapper>
               <p>{user.bio}</p>
               <div>
-                <p className={styles.follow}>
-                  {user.followers}{' '}
-                  <span className={styles.muted}>Followers</span>
+                <p>
+                  {user.followers} <Muted>Followers</Muted>
                 </p>
-                <p className={styles.follow}>
-                  {user.following}{' '}
-                  <span className={styles.muted}>Following</span>
+                <p>
+                  {user.following} <Muted>Following</Muted>
                 </p>
               </div>
               {user.blog ? (
                 <>
-                  <a
+                  <BlogLink
                     href={`https://${user.blog}`}
                     target="_blank"
                     rel="noreferrer"
-                    className={styles.blogLink}
                   >
                     <GoGlobe />
                     www.{user.blog}
-                  </a>
+                  </BlogLink>
                 </>
               ) : (
                 ''
               )}
-            </div>
-          </div>
-          <div className={styles.mainInfoContainer}>
-            <div className={styles.mainInfo}>
-              <div className={styles.analysis}>
+            </UserInfo>
+          </UserBlock>
+          <MainInfoContainer>
+            <MainInfo>
+              <Analysis>
                 {userHasRepos ? (
                   <>
                     <p>Total Repositories: {user.public_repos}</p>
@@ -136,14 +144,14 @@ export default function UserReview({ userInfo }: UserReviewProps) {
                 ) : (
                   <p>{userReposPhrase}</p>
                 )}
-              </div>
-              <div className={styles.analysis}>
+              </Analysis>
+              <Analysis>
                 <p>Total Contributions: {userInfo.userTotalContributions}</p>
                 <p>{contributionPhrase}</p>
-              </div>
-              <div className={styles.analysis}>
+              </Analysis>
+              <Analysis>
                 <p>Most used languages:</p>
-                <span className={styles.muted}>
+                <Muted>
                   {languages.map((language, index) => {
                     if (index < languages.length - 1) {
                       return <span key={language}>{' ' + language + ','}</span>
@@ -151,14 +159,14 @@ export default function UserReview({ userInfo }: UserReviewProps) {
                       return <span key={language}>{' ' + language}</span>
                     }
                   })}
-                </span>
+                </Muted>
                 <p>
                   Great choice of languages 👏
                   <br />
                   {"Thankfully you're not programming in C 😁."}
                 </p>
-              </div>
-              <div className={styles.analysis}>
+              </Analysis>
+              <Analysis>
                 {userHasRepos && <p>Most used languages with percentage:</p>}
                 {topFiveLanguages.map((language) => (
                   <span key={language.language}>
@@ -166,16 +174,16 @@ export default function UserReview({ userInfo }: UserReviewProps) {
                     {Number(language.percentage).toFixed(2)}% <br />
                   </span>
                 ))}
-              </div>
-            </div>
-            <div className={styles.contributionBoard}>
+              </Analysis>
+            </MainInfo>
+            <ContributionBoard>
               <h2>{"User's Contributions"}</h2>
               <img
                 src={`https://ghchart.rshah.org/eba417/${user.login}`}
                 alt="Name Your Github chart"
               />
-            </div>
-            <div className={styles.repositories}>
+            </ContributionBoard>
+            <Repositories>
               {userHasRepos && <h2>Public Starred Repositories</h2>}
               {userHasRepos &&
                 repos.map((repo, index) => {
@@ -185,9 +193,9 @@ export default function UserReview({ userInfo }: UserReviewProps) {
 
                   return null
                 })}
-            </div>
-          </div>
-        </div>
+            </Repositories>
+          </MainInfoContainer>
+        </Container>
       </main>
       <Footer />
     </>

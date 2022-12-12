@@ -1,30 +1,36 @@
-import axios from 'axios';
-import { NextApiRequest, NextApiResponse } from 'next';
+import axios from 'axios'
+import { NextApiRequest, NextApiResponse } from 'next'
 
-export default function checkuser(req: NextApiRequest, res: NextApiResponse) {
-	if (req.method === 'POST') {
-		const { username } = req.body;
-		const headers = {
-			Authorization: `Bearer ${process.env.GITHUB_API_ACCESS_TOKEN}`,
-		};
+export default async function checkuser(
+  req: NextApiRequest,
+  res: NextApiResponse,
+) {
+  if (req.method === 'POST') {
+    console.log('Came here')
+    const { username } = req.body
+    const headers = {
+      Authorization: `Bearer ${process.env.GITHUB_API_ACCESS_TOKEN}`,
+    }
 
-		const getUserData = async () => {
-			let userMainInfo = await axios({
-				method: 'GET',
-				url: `https://api.github.com/users/${username}`,
-				headers: {
-					Authorization: headers.Authorization,
-					'Content-Type': 'application/json',
-				},
-			}).catch(err => {
-				return res.status(404).json({
-					status: 'error',
-					message: 'User not found',
-				});
-			});
+    await axios({
+      method: 'GET',
+      url: `https://api.github.com/users/${username}`,
+      headers: {
+        Authorization: headers.Authorization,
+        'Content-Type': 'application/json',
+      },
+    })
+      .then(() => {
+        return res.status(200).json({ status: 'ok' })
+      })
+      .catch((err) => {
+        return res.status(404).json({
+          status: 'error',
+          message: 'User not found',
+          raw: err,
+        })
+      })
+  }
 
-			return res.status(200).json({ status: 'ok' });
-		};
-		getUserData();
-	}
+  return res.status(404).json({ status: 'error', message: 'Not found' })
 }

@@ -21,7 +21,7 @@ export const FormContainer = styled.div`
       max-width: 100%;
       display: flex;
       input {
-        background-color: var(--white);
+        background-color: ${({ theme }) => theme.white};
         outline: none;
         border: 0;
         border-radius: 0.25rem;
@@ -31,27 +31,27 @@ export const FormContainer = styled.div`
         font-size: 1.25rem;
 
         &::placeholder {
-          color: var(--gray-700);
+          color: ${({ theme }) => theme.gray700};
         }
       }
     }
 
     em {
       font-size: 0.875rem;
-      color: var(--gray-300);
+      color: ${({ theme }) => theme.gray300};
       margin: 0.2rem 0 0.5rem 0;
     }
 
     button {
       border: none;
       border-radius: 0.25rem;
-      background-color: var(--gray-800);
+      background-color: ${({ theme }) => theme.gray800};
 
       display: flex;
       justify-content: center;
       align-items: center;
 
-      color: var(--white);
+      color: ${({ theme }) => theme.white};
 
       font-size: 1.25rem;
       padding: 1rem 1.5rem;
@@ -78,7 +78,7 @@ export const FormContainer = styled.div`
 
 export const GithubIcon = styled.svg`
   position: absolute;
-  color: var(--yellow-500);
+  color: ${({ theme }) => theme.yellow500};
 
   justify-self: flex-end;
   align-self: center;

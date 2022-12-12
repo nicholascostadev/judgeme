@@ -1,6 +1,8 @@
-import '../styles/globals.css'
 import type { AppProps } from 'next/app'
 import { createContext, useState } from 'react'
+import { ThemeProvider } from 'styled-components'
+import { GlobalStyle } from '../styles/global'
+import theme from '../styles/theme'
 
 interface UserContextProps {
   username: string
@@ -15,9 +17,14 @@ function MyApp({ Component, pageProps }: AppProps) {
   const [username, setUsername] = useState<string>('')
 
   return (
-    <UserContext.Provider value={{ username, setUsername }}>
-      <Component {...pageProps} />
-    </UserContext.Provider>
+    <>
+      <GlobalStyle />
+      <ThemeProvider theme={theme}>
+        <UserContext.Provider value={{ username, setUsername }}>
+          <Component {...pageProps} />
+        </UserContext.Provider>
+      </ThemeProvider>
+    </>
   )
 }
 

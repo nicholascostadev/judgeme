@@ -8,7 +8,7 @@ export const FooterContainer = styled.footer`
   align-items: center;
 
   a {
-    color: var(--yellow-500);
+    color: ${({ theme }) => theme.yellow500};
     text-decoration: underline;
   }
 `

@@ -19,7 +19,7 @@ export const Container = styled.div`
 `
 
 export const UserBlock = styled.div`
-  background: var(--surface);
+  background: ${({ theme }) => theme.surface};
   border-radius: 0.5rem;
 
   min-width: 250px;
@@ -109,7 +109,7 @@ export const GithubLinkWrapper = styled.a`
   transition: color 0.2s;
 
   &:hover {
-    color: var(--yellow-500);
+    color: ${({ theme }) => theme.yellow500};
   }
 
   > svg {
@@ -158,12 +158,16 @@ export const MainInfo = styled.div`
 export const Analysis = styled.div`
   min-height: 200px;
   padding: 1rem;
-  background: var(--surface);
+  background: ${({ theme }) => theme.surface};
   border-radius: 0.5rem;
   box-shadow: rgba(17, 17, 26, 0.1) 0px 0px 16px;
 
   p:first-child {
     margin-top: 0;
+  }
+
+  &:last-child {
+    grid-column: 1/-1;
   }
 `
 
@@ -190,7 +194,7 @@ export const Repositories = styled.div`
 `
 
 export const Muted = styled.span`
-  color: var(--gray-300);
+  color: ${({ theme }) => theme.gray300};
 `
 
 export const BlogLink = styled.a`
@@ -201,7 +205,7 @@ export const BlogLink = styled.a`
   transition: color 0.2s;
 
   &:hover {
-    color: var(--yellow-500);
+    color: ${({ theme }) => theme.yellow500};
   }
 
   > svg {

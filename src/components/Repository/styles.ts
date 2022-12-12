@@ -10,7 +10,7 @@ export const Repository = styled.div`
 
   padding: 1rem;
 
-  background: var(--surface);
+  background: ${({ theme }) => theme.surface};
   border-radius: 0.5rem;
 
   h4 {
@@ -34,7 +34,7 @@ export const Repository = styled.div`
     }
 
     &:hover {
-      color: var(--yellow-500);
+      color: ${({ theme }) => theme.yellow500};
     }
   }
 `

@@ -3,7 +3,7 @@ import styled from 'styled-components'
 export const HeaderContainer = styled.header`
   width: 100%;
   height: 100px;
-  border-bottom: 1px solid var(--gray-300);
+  border-bottom: 1px solid ${({ theme }) => theme.gray300};
 
   > div {
     display: flex;
@@ -13,7 +13,8 @@ export const HeaderContainer = styled.header`
     margin: 0 15%;
     height: 100%;
 
-    color: var(--yellow-500);
+    color: ${({ theme }) => theme.yellow500};
+
     @media (max-width: 768px) {
       margin: 0 1rem;
 

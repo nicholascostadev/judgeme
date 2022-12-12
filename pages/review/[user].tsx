@@ -68,6 +68,10 @@ export default function UserReview({ userInfo }: UserReviewProps) {
   const user: TUserInfo = JSON.parse(String(userInfo.userMainInfo))
   const repos: Repo[] = JSON.parse(String(userInfo.reposInfo))
 
+  const userRepos = repos.filter(
+    (repo, i) => repo.owner.login === user.login && i < 8,
+  )
+
   const [topFiveLanguages, languages]: [
     { language: string; percentage: number }[],
     string[],
@@ -76,16 +80,6 @@ export default function UserReview({ userInfo }: UserReviewProps) {
   const contributionPhrase: string = dynamicContributionPhrase(
     userInfo.userTotalContributions,
   )
-
-  let userHasRepos: boolean = false
-
-  if (user.public_repos > 0) {
-    repos.forEach((repo, index) => {
-      if (repo.owner.login === user.login && index < 8) {
-        userHasRepos = true
-      }
-    })
-  }
 
   return (
     <>
@@ -136,7 +130,7 @@ export default function UserReview({ userInfo }: UserReviewProps) {
           <MainInfoContainer>
             <MainInfo>
               <Analysis>
-                {userHasRepos ? (
+                {userRepos ? (
                   <>
                     <p>Total Repositories: {user.public_repos}</p>
                     <p> {userReposPhrase}</p>
@@ -176,15 +170,10 @@ export default function UserReview({ userInfo }: UserReviewProps) {
               />
             </ContributionBoard>
             <Repositories>
-              {userHasRepos && <h2>Public Starred Repositories</h2>}
-              {userHasRepos &&
-                repos.map((repo, index) => {
-                  if (repo.owner.login === user.login && index < 8) {
-                    return <Repository repo={repo} key={repo.id} />
-                  }
-
-                  return null
-                })}
+              {userRepos && <h2>Public Starred Repositories</h2>}
+              {userRepos.map((repo) => (
+                <Repository repo={repo} key={repo.id} />
+              ))}
             </Repositories>
           </MainInfoContainer>
         </Container>

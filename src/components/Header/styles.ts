@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import styled from 'styled-components'
 
 export const HeaderContainer = styled.header`
@@ -25,7 +26,7 @@ export const HeaderContainer = styled.header`
   }
 `
 
-export const Brand = styled.a`
+export const Brand = styled(Link)`
   font-size: 2.5rem;
   cursor: pointer;
 

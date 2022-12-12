@@ -17,10 +17,12 @@ export const dynamicUserRepoPhrase = (numOfRepos: number): string => {
   return userReposPhrase
 }
 
-export const dynamicContributionPhrase = (numOfContribs: number): string => {
+export const dynamicContributionPhrase = (
+  numOfContribs: number | null,
+): string => {
   let userContribsPhrase = ''
 
-  if (numOfContribs === 0) {
+  if (numOfContribs === 0 || !numOfContribs) {
     userContribsPhrase = 'No contributions 😔'
   } else if (numOfContribs < 25) {
     userContribsPhrase = "You're a normal person, congrats 👏"

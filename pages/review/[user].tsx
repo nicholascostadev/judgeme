@@ -30,7 +30,7 @@ interface UserReviewProps {
     userMainInfo: TUserInfo | undefined
     reposInfo: Repo[] | undefined
     userRepos: Repo[] | undefined
-    userTotalContributions: number
+    userTotalContributions: number | null
   }
 }
 
@@ -54,7 +54,7 @@ export default function UserReview({ userInfo }: UserReviewProps) {
   return (
     <>
       <Head>
-        <title>{user.login} | Judgeme </title>
+        <title>Judgeme </title>
       </Head>
       <main>
         <Header />
@@ -92,9 +92,7 @@ export default function UserReview({ userInfo }: UserReviewProps) {
                     www.{user.blog}
                   </BlogLink>
                 </>
-              ) : (
-                ''
-              )}
+              ) : null}
             </UserInfo>
           </UserBlock>
           <MainInfoContainer>
@@ -103,14 +101,19 @@ export default function UserReview({ userInfo }: UserReviewProps) {
                 {userRepos ? (
                   <>
                     <p>Total Repositories: {user.public_repos}</p>
-                    <p> {userReposPhrase}</p>
+                    <p>{userReposPhrase}</p>
                   </>
                 ) : (
                   <p>{userReposPhrase}</p>
                 )}
               </Analysis>
               <Analysis>
-                <p>Total Contributions: {userInfo.userTotalContributions}</p>
+                <p>
+                  Total Contributions:{' '}
+                  {userInfo.userTotalContributions
+                    ? userInfo.userTotalContributions
+                    : null}
+                </p>
                 <p>{contributionPhrase}</p>
               </Analysis>
               <Analysis>

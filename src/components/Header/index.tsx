@@ -1,4 +1,3 @@
-import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { Brand, HeaderContainer } from './styles'
 
@@ -9,9 +8,7 @@ export default function Header() {
   return (
     <HeaderContainer>
       <div>
-        <Link href="/">
-          <Brand>Judge Me</Brand>
-        </Link>
+        <Brand href="/">Judge Me</Brand>
         <h2>{user ?? ''}</h2>
       </div>
     </HeaderContainer>

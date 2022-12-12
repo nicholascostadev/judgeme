@@ -1,6 +1,5 @@
 import { GoLinkExternal, GoMarkGithub } from 'react-icons/go'
-
-import styles from './repository.module.scss'
+import { Repository as RepositoryContainer } from './styles'
 
 type RepoType = {
   id: number
@@ -16,7 +15,7 @@ interface RepositoryProps {
 
 export function Repository({ repo }: RepositoryProps) {
   return (
-    <div className={styles.repository}>
+    <RepositoryContainer>
       <h4>{repo.name}</h4>
       <p>{repo.description ?? 'No description for the given repo'}</p>
       {repo.homepage && (
@@ -27,6 +26,6 @@ export function Repository({ repo }: RepositoryProps) {
       <a href={repo.html_url ?? ''} target="_blank" rel="noreferrer">
         <GoMarkGithub />
       </a>
-    </div>
+    </RepositoryContainer>
   )
 }

@@ -17,6 +17,10 @@ export default async function checkuser(
       headers: {
         Authorization: headers.Authorization,
         'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'DELETE, POST, GET, OPTIONS',
+        'Access-Control-Allow-Headers':
+          'Content-type, Authorization, X-Requested-With',
       },
     })
       .then(() => {

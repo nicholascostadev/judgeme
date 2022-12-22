@@ -6,7 +6,6 @@ export default async function checkuser(
   res: NextApiResponse,
 ) {
   if (req.method === 'POST') {
-    console.log('Came here')
     const { username } = req.body
     const headers = {
       Authorization: `Bearer ${process.env.GITHUB_API_ACCESS_TOKEN}`,
@@ -31,6 +30,4 @@ export default async function checkuser(
         })
       })
   }
-
-  return res.status(404).json({ status: 'error', message: 'Not found' })
 }

@@ -55,7 +55,7 @@ type Repo = {
 type RepositoryProps = Repo[] | undefined
 
 export const getUserMostUsedLanguage = (repos: RepositoryProps) => {
-  const parsedArray = JSON.parse(String(repos))
+  const parsedArray = repos
   const languages = parsedArray?.map((repo: Repo) => repo.language)
   const filteredLanguages = languages?.filter(
     (language: string) => language !== null && language !== 'null',

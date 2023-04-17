@@ -35,8 +35,8 @@ interface UserReviewProps {
 }
 
 export default function UserReview({ userInfo }: UserReviewProps) {
-  const user: TUserInfo = JSON.parse(String(userInfo.userMainInfo))
-  const repos: Repo[] = JSON.parse(String(userInfo.reposInfo))
+  const user: TUserInfo = userInfo?.userMainInfo as TUserInfo
+  const repos: Repo[] = userInfo?.reposInfo as Repo[]
 
   const userRepos = repos.filter(
     (repo, i) => repo.owner.login === user.login && i < 8,
@@ -162,33 +162,6 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
       Authorization: `Bearer ${process.env.GITHUB_API_ACCESS_TOKEN}`,
     }
 
-    const userMainInfo = await axios({
-      method: 'GET',
-      url: `https://api.github.com/users/${params!.user}`,
-      headers: {
-        Authorization: headers.Authorization,
-        'Content-Type': 'application/json',
-      },
-    })
-
-    const userRepos = await axios({
-      method: 'GET',
-      url: `https://api.github.com/users/${params!.user}/repos`,
-      headers: {
-        Authorization: headers.Authorization,
-        'Content-Type': 'application/json',
-      },
-    })
-
-    const reposInfo = await axios({
-      method: 'GET',
-      url: `https://api.github.com/users/${params!.user}/starred`,
-      headers: {
-        Authorization: headers.Authorization,
-        'Content-Type': 'application/json',
-      },
-    })
-
     const body = {
       query: `query {
 						user(login: "${params!.user}") {
@@ -202,23 +175,51 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
 					}`,
     }
 
-    const response = await fetch('https://api.github.com/graphql', {
-      method: 'POST',
-      body: JSON.stringify(body),
-      headers,
-    })
+    const [userMainInfo, userRepos, reposInfo, data] = await Promise.all([
+      axios({
+        method: 'GET',
+        url: `https://api.github.com/users/${params!.user}`,
+        headers: {
+          Authorization: headers.Authorization,
+          'Content-Type': 'application/json',
+        },
+      }),
+      axios({
+        method: 'GET',
+        url: `https://api.github.com/users/${params!.user}/repos`,
+        headers: {
+          Authorization: headers.Authorization,
+          'Content-Type': 'application/json',
+        },
+      }),
+      axios({
+        method: 'GET',
+        url: `https://api.github.com/users/${params!.user}/starred`,
+        headers: {
+          Authorization: headers.Authorization,
+          'Content-Type': 'application/json',
+        },
+      }),
+      fetch('https://api.github.com/graphql', {
+        method: 'POST',
+        body: JSON.stringify(body),
+        headers: {
+          Authorization: headers.Authorization,
+        },
+      }),
+    ])
 
-    const data = await response.json()
+    const userContributions = await data.json()
 
     const userTotalContributions = Number(
-      data?.data?.user?.contributionsCollection?.contributionCalendar
-        ?.totalContributions,
+      userContributions?.data?.user?.contributionsCollection
+        ?.contributionCalendar?.totalContributions,
     )
 
     const userInfo = {
-      userMainInfo: JSON.stringify(userMainInfo.data),
-      reposInfo: JSON.stringify(reposInfo.data),
-      userRepos: JSON.stringify(userRepos.data),
+      userMainInfo: userMainInfo.data,
+      reposInfo: reposInfo.data,
+      userRepos: userRepos.data,
       userTotalContributions,
     }
 

@@ -60,25 +60,29 @@ export const getUserMostUsedLanguage = (repos: RepositoryProps) => {
   const filteredLanguages = languages?.filter(
     (language: string) => language !== null && language !== 'null',
   )
-  const languageCount = filteredLanguages?.reduce((acc: any, curr: any) => {
-    if (acc[curr]) {
-      acc[curr]++
-    } else {
-      acc[curr] = 1
-    }
-    return acc
-  }, {})
+  const languageCount = filteredLanguages?.reduce(
+    (acc: Record<string, number>, curr: string) => {
+      if (acc[curr]) {
+        acc[curr]++
+      } else {
+        acc[curr] = 1
+      }
+      return acc
+    },
+    {},
+  )
 
-  const languagePercentage = Object.keys(languageCount).reduce(
-    (acc: any, curr: any) => {
-      acc[curr] = (languageCount[curr] / languages.length) * 100
+  const languagePercentage = Object.keys(languageCount ?? {}).reduce(
+    (acc: Record<string, number>, curr: string) => {
+      acc[curr] =
+        ((languageCount?.[curr] ?? 1) / (languages?.length ?? 1)) * 100
       return acc
     },
     {},
   )
 
   const sortedLanguages = Object.keys(languagePercentage).reduce(
-    (acc: any, curr: any) => {
+    (acc: Record<string, number>, curr) => {
       acc[curr] = languagePercentage[curr]
       return acc
     },
@@ -86,7 +90,13 @@ export const getUserMostUsedLanguage = (repos: RepositoryProps) => {
   )
 
   const sortedLanguagesArray = Object.keys(sortedLanguages).reduce(
-    (acc: any, curr: any) => {
+    (
+      acc: {
+        language: string
+        percentage: number
+      }[],
+      curr: string,
+    ) => {
       acc.push({
         language: curr,
         percentage: sortedLanguages[curr],
@@ -97,17 +107,14 @@ export const getUserMostUsedLanguage = (repos: RepositoryProps) => {
   )
 
   const sortedLanguagesArraySorted = sortedLanguagesArray.sort(
-    (a: any, b: any) => b.percentage - a.percentage,
-  ) as {
-    language: string
-    percentage: string
-  }[]
+    (a, b) => b.percentage - a.percentage,
+  )
 
   const topFiveLanguages = sortedLanguagesArraySorted.slice(0, 5)
 
   // get top 5 languages as array of strings
   const topFiveLanguagesArray = topFiveLanguages.map(
-    (language: any) => language.language,
+    (language: { language: string }) => language.language,
   ) as string[]
 
   return {
